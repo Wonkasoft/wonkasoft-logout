@@ -1,0 +1,44 @@
+{
+  "name": "hitandrun",
+  "version": "1.0.0",
+  "description": "Hitandrun Theme is a custom theme build for hitandrunbattingcages.com.",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "gulp serve",
+    "watch": "gulp watch",
+    "build": "gulp build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Wonkasoft/hitandrun.git"
+  },
+  "author": "Wonkasoft",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Wonkasoft/hitandrun/issues"
+  },
+  "homepage": "https://github.com/Wonkasoft/hitandrun#readme",
+  "devDependencies": {
+    "browser-sync": "^2.18.13",
+    "fs-extra": "^4.0.2",
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.9.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-imagemin": "^3.4.0",
+    "gulp-js-minify": "0.0.3",
+    "gulp-jshint": "^2.0.4",
+    "gulp-notify": "^3.0.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.6.4",
+    "jshint": "^2.9.5",
+    "json-file": "^0.1.0",
+    "node-fs": "^0.1.7",
+    "path": "^0.12.7"
+  },
+  "siteName": "hitandrunbattingcages.com",
+  "dependencies": {
+    "update": "^0.7.4"
+  }
+}

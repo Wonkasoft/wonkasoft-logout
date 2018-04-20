@@ -67,8 +67,8 @@ class Wonkasoft_Logout {
 	 * @since    1.0.0
 	 */
 	public function __construct() {
-		if ( defined( 'PLUGIN_NAME_VERSION' ) ) {
-			$this->version = PLUGIN_NAME_VERSION;
+		if ( defined( 'WONKASOFT_LOGOUT_VERSION' ) ) {
+			$this->version = WONKASOFT_LOGOUT_VERSION;
 		} else {
 			$this->version = '1.0.0';
 		}

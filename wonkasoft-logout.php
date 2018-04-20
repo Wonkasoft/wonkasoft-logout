@@ -35,6 +35,9 @@ if ( ! defined( 'WPINC' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
+define( 'WONKASOFT_LOGOUT_PATH', plugin_dir_path(__FILE__) );
+define( 'WONKASOFT_LOGOUT_NAME', plugin_basename(dirname(__FILE__)) );
+define( 'WONKASOFT_LOGOUT_BASENAME', plugin_basename(__FILE__) );
 define( 'WONKASOFT_LOGOUT_VERSION', '1.0.0' );
 
 /**

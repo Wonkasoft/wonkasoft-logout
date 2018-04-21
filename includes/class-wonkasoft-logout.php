@@ -158,7 +158,8 @@ class Wonkasoft_Logout {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'wonkasoft_logout_add_action_links' );
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'wonkasoft_logout_display_admin_page' );
-		$this->loader->add_action( 'admin_menu', $plugin_admin, 'wonkasoft_logout_redirector' );
+		$this->loader->add_action( 'wp_logout', $plugin_admin, 'wonkasoft_logout_redirector' );
+		$this->loader->add_action( 'wp_login', $plugin_admin, 'wonkasoft_login_redirector' );
 
 	}
 

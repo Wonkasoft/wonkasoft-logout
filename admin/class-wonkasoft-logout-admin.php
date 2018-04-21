@@ -189,7 +189,16 @@ class Wonkasoft_Logout_Admin {
 		function wonkasoft_logout_url( $args ) {
 
 			$logout_value = ( get_option( 'wonkasoft_logout_url' ) ) ? esc_attr( get_option( 'wonkasoft_logout_url' ) ): '';
-			echo '<input id="wonkasoft_logout_url" name="wonkasoft_logout_url" class="wonkasoft-input wonkasoft-logout-url" placeholder="redirect url here..." value="' . $logout_value . '" />';
+			$dropdown_args = array(
+				'depth' => 0,
+				'selected' => $logout_value,
+				'name' => 'wonkasoft_logout_url',
+				'id' => 'wonkasoft_logout_url',
+				'class' => 'wonkasoft-logout-page-select',
+				'show_option_none' => 'Select a page to redirect',
+				'option_none_value' => '',
+			);
+			wp_dropdown_pages( $dropdown_args );
 
 		}
 
@@ -203,7 +212,16 @@ class Wonkasoft_Logout_Admin {
 		function wonkasoft_login_url( $args ) {
 
 			$login_value = ( get_option( 'wonkasoft_login_url' ) ) ? esc_attr( get_option( 'wonkasoft_login_url' ) ): '';
-			echo '<input id="wonkasoft_login_url" name="wonkasoft_login_url" class="wonkasoft-input wonkasoft-login-url" placeholder="redirect url here..." value="' . $login_value . '" />';
+			$dropdown_args = array(
+				'depth' => 0,
+				'selected' => $login_value,
+				'name' => 'wonkasoft_login_url',
+				'id' => 'wonkasoft_login_url',
+				'class' => 'wonkasoft-logout-page-select',
+				'show_option_none' => 'Select a page to redirect',
+				'option_none_value' => '',
+			);
+			wp_dropdown_pages( $dropdown_args );
 
 		}
 	}
@@ -233,11 +251,18 @@ class Wonkasoft_Logout_Admin {
 	 */
 	public function wonkasoft_logout_redirector() {
 
+		/**
+		 * [$logout_value This grabs the value for this setting that is stored in the db]
+		 * @var [int] page_id
+		 */
 		$logout_value = ( get_option( 'wonkasoft_logout_url' ) ) ? esc_attr( get_option( 'wonkasoft_logout_url' ) ): '';
 
+		/**
+		 * This check if page is set for redirect.
+		 */
 		if ( $logout_value !== '' ) {
 
-			$logout = ( strpos( $logout_value, 'http' ) ) ? $logout_value: home_url() . $logout_value;
+			$logout = get_permalink( $logout_value );
 			wp_redirect( $logout );
 			exit();
 		}
@@ -251,11 +276,18 @@ class Wonkasoft_Logout_Admin {
 	 */
 	public function wonkasoft_login_redirector() {
 
+		/**
+		 * [$login_value This grabs the value for this setting that is stored in the db]
+		 * @var [int] page_id
+		 */
 		$login_value = ( get_option( 'wonkasoft_login_url' ) ) ? esc_attr( get_option( 'wonkasoft_login_url' ) ): '';
 
+		/**
+		 * This check if page is set for redirect.
+		 */
 		if ( $login_value !== '' ) {
 
-			$login = ( strpos( $login_value, 'http' ) ) ? $login_value: home_url() . $login_value;
+			$login = get_permalink( $login_value );
 			wp_redirect( $login );
 			exit();
 		}

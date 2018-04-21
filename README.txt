@@ -1,5 +1,6 @@
 === Plugin Name ===
-Contributors: (this should be a list of wordpress.org userid's)
+Wonkasoft Logout
+Contributors: mrlister1, llister
 Donate link: https://paypal.me/Wonkasoft
 Tags: logout, redirect
 Requires at least: 3.0.1

@@ -104,16 +104,48 @@ class Wonkasoft_Logout_Admin {
 	public function wonkasoft_logout_display_admin_page() {
 
 		/**
-		 * This creates option page in the settings tab of admin menu
+		 * This will check for Wonkasoft Tools Menu, if not found it will make it.
 		 */
-		
-		add_options_page(
-			'Wonkasoft Logout',
-			'Wonkasoft Logout',
-			'manage_options',
-			'wonkasoft_logout_show_settings_page',
-			array( $this,'wonkasoft_logout_show_settings_page' )
-		);
+		if ( empty ( $GLOBALS['admin_page_hooks']['wonkasoft_menu'] ) ) {
+			
+			global $wonkasoft_logout_page;
+			$wonkasoft_logout_page = 'wonkasoft_menu';
+			add_menu_page(
+				'Wonkasoft',
+				'Wonkasoft Tools',
+				'manage_options',
+				'wonkasoft_menu',
+				array( $this,'wonkasoft_logout_settings_page' ),
+				plugins_url( "/img/wonka-logo-2.svg", __FILE__ ),
+				100
+			);
+
+			add_submenu_page(
+				'wonkasoft_menu',
+				'Wonkasoft Logout',
+				'Wonkasoft Logout',
+				'manage_options',
+				'wonkasoft_menu',
+				array( $this,'wonkasoft_logout_settings_page' )
+			);
+
+		} else {
+
+			/**
+			 * This creates option page in the settings tab of admin menu
+			 */
+			global $wonkasoft_logout_page;
+			$wonkasoft_logout_page = 'wonkasoft_logout_settings_page';
+			add_submenu_page(
+				'wonkasoft_menu',
+				'Wonkasoft Logout',
+				'Wonkasoft Logout',
+				'manage_options',
+				'wonkasoft_logout_settings_page',
+				array( $this,'wonkasoft_logout_settings_page' )
+			);
+
+		}
 
 		/**
 		 * This creates settings area that is displayed on options page
@@ -123,7 +155,7 @@ class Wonkasoft_Logout_Admin {
 			'wonkasoft_logout', 
 			'For Logout Redirect', 
 			null, 
-			'wonkasoft_logout_show_settings_page'
+			'wonkasoft_logout_settings_page'
 		);
 
 		/**
@@ -134,7 +166,7 @@ class Wonkasoft_Logout_Admin {
 			'wonkasoft_logout_url',
 			'Logout Redirect URL',
 			'wonkasoft_logout_url',
-			'wonkasoft_logout_show_settings_page',
+			'wonkasoft_logout_settings_page',
 			'wonkasoft_logout'
 		);
 
@@ -155,7 +187,7 @@ class Wonkasoft_Logout_Admin {
 			'wonkasoft_login', 
 			'For Login Redirect', 
 			null, 
-			'wonkasoft_logout_show_settings_page'
+			'wonkasoft_logout_settings_page'
 		);
 
 		/**
@@ -166,7 +198,7 @@ class Wonkasoft_Logout_Admin {
 			'wonkasoft_login_url',
 			'Login Redirect URL',
 			'wonkasoft_login_url',
-			'wonkasoft_logout_show_settings_page',
+			'wonkasoft_logout_settings_page',
 			'wonkasoft_login'
 		);
 
@@ -227,11 +259,11 @@ class Wonkasoft_Logout_Admin {
 	}
 
 	/**
-	 * [wonkasoft_logout_show_settings_page This function displays the admin settings page]
+	 * [wonkasoft_logout_settings_page This function displays the admin settings page]
 	 *
 	 * @since 1.0.0
 	 */
-	public function wonkasoft_logout_show_settings_page() {
+	public function wonkasoft_logout_settings_page() {
 		include plugin_dir_path( __FILE__ ) . 'partials/wonkasoft-logout-admin-display.php';
 	}
 

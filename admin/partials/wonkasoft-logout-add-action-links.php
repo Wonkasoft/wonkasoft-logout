@@ -23,9 +23,10 @@
 add_filter( 'plugin_action_links_'. WONKASOFT_LOGOUT_BASENAME, 'wonkasoft_logout_add_settings_link_filter' , 10, 1);
 
 function wonkasoft_logout_add_settings_link_filter( $links ) { 
-	$links_addon = '<a href="admin.php?page=wonkasoft-logout-admin-display" target="_self">Settings</a>';
+	global $wonkasoft_logout_page;
+	$links_addon = '<a href="' . menu_page_url( $wonkasoft_logout_page, 0 ) . '" target="_self">Settings</a>';
 	array_unshift($links, $links_addon);
-	$links[] = '<a href="https://paypal.me/Wonkasoft" target="blank"><img src="' . plugin_dir_url( "wonka-slide" ) . "wonkasoft-logout/admin/img/ws-slide-logo.svg" . '" style="width: 20px; height: 20px; display: inline-block;
+	$links[] = '<a href="https://paypal.me/Wonkasoft" target="blank"><img src="' . plugins_url( '../img/wonka-logo.svg', __FILE__ ) . '" style="width: 20px; height: 20px; display: inline-block;
     vertical-align: text-top; float: none;" /></a>';
  return $links; 
 }
@@ -33,9 +34,10 @@ function wonkasoft_logout_add_settings_link_filter( $links ) {
 add_filter( 'plugin_row_meta', 'wonkasoft_logout_add_description_link_filter', 10, 2);
 
 function wonkasoft_logout_add_description_link_filter( $links, $file ) {
-	if ( strpos($file, 'wonka-slide.php') !== false ) {
-		$links[] = '<a href="admin.php?page=wonkasoft-logout-admin-display" target="_self">Settings</a>';
-		$links[] = '<a href="https://paypal.me/Wonkasoft" target="blank">Donate <img src="' . plugin_dir_url( "wonka-slide" ) . "wonkasoft-logout/admin/img/ws-slide-logo.svg" . '" style="width: 20px; height: 20px; display: inline-block;
+	global $wonkasoft_logout_page;
+	if ( strpos($file, 'wonkasoft-logout.php') !== false ) {
+		$links[] = '<a href="' . menu_page_url( $wonkasoft_logout_page, 0 ) . '" target="_self">Settings</a>';
+		$links[] = '<a href="https://paypal.me/Wonkasoft" target="blank">Donate <img src="' . plugins_url( '../img/wonka-logo.svg', __FILE__ ) . '" style="width: 20px; height: 20px; display: inline-block;
     vertical-align: text-top;" /></a>';
 	}
  return $links; 

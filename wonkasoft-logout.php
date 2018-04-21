@@ -1,12 +1,9 @@
 <?php
 
 /**
- * The plugin bootstrap file
+ * The bootstrap file for Wonkasoft Logout
  *
- * This file is read by WordPress to generate the plugin information in the plugin
- * admin area. This file also includes all of the dependencies used by the plugin,
- * registers the activation and deactivation functions, and defines a function
- * that starts the plugin.
+ * This Plugin will allow you to direct where the user will go after either logging in or logging out of an account on the site.
  *
  * @link              https://wonkasoft.com
  * @since             1.0.0
@@ -15,7 +12,7 @@
  * @wordpress-plugin
  * Plugin Name:       Wonkasoft Logout
  * Plugin URI:        https://wonkasoft.com/wonkasoft-logout
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Description:       This Plugin will allow you to direct where the user will go after either logging in or logging out of an account on the site.
  * Version:           1.0.0
  * Author:            Wonkasoft
  * Author URI:        https://wonkasoft.com
@@ -31,13 +28,12 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 /**
- * Currently plugin version.
- * Start at version 1.0.0 and use SemVer - https://semver.org
- * Rename this for your plugin and update it as you release new versions.
+ * Currently plugin version and paths.
+ * 
  */
-define( 'WONKASOFT_LOGOUT_PATH', plugin_dir_path(__FILE__) );
-define( 'WONKASOFT_LOGOUT_NAME', plugin_basename(dirname(__FILE__)) );
-define( 'WONKASOFT_LOGOUT_BASENAME', plugin_basename(__FILE__) );
+define( 'WONKASOFT_LOGOUT_PATH', plugin_dir_path( __FILE__ ) );
+define( 'WONKASOFT_LOGOUT_NAME', plugin_basename(dirname( __FILE__ ) ) );
+define( 'WONKASOFT_LOGOUT_BASENAME', plugin_basename( __FILE__ ) );
 define( 'WONKASOFT_LOGOUT_VERSION', '1.0.0' );
 
 /**

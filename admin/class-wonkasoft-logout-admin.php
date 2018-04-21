@@ -102,14 +102,68 @@ class Wonkasoft_Logout_Admin {
 
 	// Active the Admin / Settings page
 	public function wonkasoft_logout_display_admin_page() {
-		add_submenu_page(
-			'Settings',
+		add_options_page(
+			'Wonkasoft Logout',
 			'Wonkasoft Logout',
 			'manage_options',
-			'wonkasoft-logout-admin-display',
-			array( $this,'wonkasoft_logout_show_settings_page' ),
-			100
-			);
+			'wonkasoft_logout_show_settings_page',
+			array( $this,'wonkasoft_logout_show_settings_page' )
+		);
+
+
+		add_settings_section( 
+			'wonkasoft_logout', 
+			'For Logout Redirect', 
+			null, 
+			'wonkasoft_logout_show_settings_page'
+		);
+
+		add_settings_field(
+			'wonkasoft_logout_url',
+			'Logout Redirect URL',
+			'wonkasoft_logout_url',
+			'wonkasoft_logout_show_settings_page',
+			'wonkasoft_logout'
+		);
+
+	    register_setting( 
+	    	'wonkasoft_logout_settings', 
+	    	'wonkasoft_logout_url' 
+	    ); 
+
+		add_settings_section( 
+			'wonkasoft_login', 
+			'For Login Redirect', 
+			null, 
+			'wonkasoft_logout_show_settings_page'
+		);
+
+		add_settings_field(
+			'wonkasoft_login_url',
+			'Login Redirect URL',
+			'wonkasoft_login_url',
+			'wonkasoft_logout_show_settings_page',
+			'wonkasoft_login'
+		);
+
+	    register_setting( 
+	    	'wonkasoft_logout_settings', 
+	    	'wonkasoft_login_url'
+	    ); 
+
+		function wonkasoft_logout_url( $args ) {
+
+			$logout_value = ( get_option( 'wonkasoft_logout_url' ) ) ? esc_attr( get_option( 'wonkasoft_logout_url' ) ): '';
+			echo '<input id="wonkasoft_logout_url" name="wonkasoft_logout_url" class="wonkasoft-input wonkasoft-logout-url" placeholder="redirect url here..." value="' . $logout_value . '" />';
+
+		}
+
+		function wonkasoft_login_url( $args ) {
+
+			$login_value = ( get_option( 'wonkasoft_login_url' ) ) ? esc_attr( get_option( 'wonkasoft_login_url' ) ): '';
+			echo '<input id="wonkasoft_login_url" name="wonkasoft_login_url" class="wonkasoft-input wonkasoft-login-url" placeholder="redirect url here..." value="' . $login_value . '" />';
+
+		}
 	}
 
 	// To display the setting page for Wonkasoft Logout
@@ -120,6 +174,33 @@ class Wonkasoft_Logout_Admin {
 	// Create the action links on the plugins page
 	public function wonkasoft_logout_add_action_links() {
 		include plugin_dir_path( __FILE__ ) . 'partials/wonkasoft-logout-add-action-links.php';
+	}
+
+	public function wonkasoft_logout_redirector() {
+
+		$logout_value = ( get_option( 'wonkasoft_logout_url' ) ) ? esc_attr( get_option( 'wonkasoft_logout_url' ) ): '';
+		$login_value = ( get_option( 'wonkasoft_login_url' ) ) ? esc_attr( get_option( 'wonkasoft_login_url' ) ): '';
+
+		if ( $logout_value !== '' ) {
+			
+			add_action( 'admin_menu','auto_redirect_after_logout' );
+			
+		}
+
+		function auto_redirect_after_logout(){
+
+			$logout = ( strpos( $logout, 'http' ) ) ? $logout: home_url() . $logout;
+			var_dump($logout);
+			wp_redirect( $logout );
+			exit();
+		}
+
+		add_action('wp_login','auto_redirect_after_login');
+
+		function auto_redirect_after_login(){
+		 wp_redirect( home_url() .'/' );
+		 exit();
+		}
 	}
 
 }
